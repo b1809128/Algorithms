@@ -1,11 +1,9 @@
 const diagonalDifference = (matrix) => {
   var sum1 = 0;
   var sum2 = 0;
-  var j;
   var count = matrix.length-1;
   for (var i = 0; i < matrix.length; i++) {
-    j = i;
-    sum1 += matrix[i][j];
+    sum1 += matrix[i][i];
     sum2 += matrix[i][count];
     count--;
   }
