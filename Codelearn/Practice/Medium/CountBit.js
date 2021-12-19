@@ -13,7 +13,6 @@ const checkBit = (n) => {
 
 const countBit = (x) => {
   var array = [];
-  var count = 0;
   var arrayCount = [];
   var str = "";
   for (var i = 0; i < x.length; i++) {
