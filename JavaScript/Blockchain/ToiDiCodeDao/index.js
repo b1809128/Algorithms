@@ -8,7 +8,7 @@ class Block {
   }
 
   calculateHash() {
-    return hash(this.prevHash + JSON.stringify(this.data + this.timeStamp));
+    return hash(this.prevHash + JSON.stringify(this.data + this.timeStamp)).toString();
   }
 }
 
