@@ -68,7 +68,7 @@ const mySet = function () {
 //15:52
 var setA = new mySet();
 var setB  =new mySet();
-
+//this.values();
 setA.add('a');
 setB.add('b');
 setB.add('c');
