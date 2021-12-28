@@ -1,3 +1,4 @@
+// Trong Object khong duoc su dung arrow function
 //Khởi tạo object có đối tượng info là một hàm
 const person= {
     name:"QuocHuy",
