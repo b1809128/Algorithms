@@ -9,21 +9,23 @@ class Sort {
 
   swap = (i, j) => {
     //Swap truyen thong
-    const temp = this.data[i];
+    let temp = this.data[i];
     this.data[i] = this.data[j];
     this.data[j] = temp;
-    //Swap new
-    return ([this.data[i], this.data[j]] = [this.data[j], this.data[i]]);
+    
   };
+
+  swapNew = (i, j) =>{
+    //Swap new
+    [this.data[i], this.data[j]] = [this.data[j], this.data[i]];
+  }
 
   //Sap xep 2 thang ke nhau thang nao lon thi noi len
   bubbleSort = () => {
     for (let i = 0; i < this.data.length - 1; i++) {
       for (let j = 0; j < this.data.length - 1 - i; j++) {
         if (this.data[j] > this.data[j + 1]) {
-          const temp = this.data[j];
-          this.data[j] = this.data[j + 1];
-          this.data[j + 1] = temp;
+          this.swap(j, j + 1);
         }
       }
     }
@@ -34,9 +36,7 @@ class Sort {
     for (let i = 0; i < this.data.length - 1; i++) {
       for (let j = this.data.length - 1; j > i; j--) {
         if (this.data[j] < this.data[j - 1]) {
-          const temp = this.data[j];
-          this.data[j] = this.data[j - 1];
-          this.data[j - 1] = temp;
+          this.swap(j, j - 1);
         }
       }
     }
@@ -53,11 +53,13 @@ class Sort {
         }
       }
       //swap function
-      [this.data[min], this.data[i]] = [this.data[i], this.data[min]];
+      this.swapNew(min,i)
     }
     return this.data;
   };
 }
+
+class SortElement extends Sort {}
 
 const test = [1, 2, 4, 5, 1, 3, 8, 5];
 const arr1 = new Sort(test);
