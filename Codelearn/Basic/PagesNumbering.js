@@ -1,10 +1,9 @@
 const pagesNumbering = (n) => {
-    var s = "";
-    for (let i = 1; i <= n; i++) {
-        s+=i;
-        // console.log(i.toString());
+    var k1 = 0,k2;
+    const l = n.toString().length;
+    if(l > 0 && l < 10){
+        k1 = n
     }
-    console.log(s.length);
 }
 
-pagesNumbering(1100000)
+pagesNumbering(11)

@@ -18,22 +18,16 @@ const checkPrimeNumber = (x) => {
 };
 
 const analyzeFactor = (n) => {
-  var array = [];
   var sum = 0;
-  for (let i = 1; i <= n; i++) {
+  for (let i = 2; i <= n; i++) {
     if (n % i == 0 && checkPrimeNumber(i)) {
-      // array.push(i);
       while (n % i == 0) {
         n /= i;
-        array.push(i);
+        sum += i;
       }
     }
   }
-  for (let i = 0; i < array.length; i++) {
-    sum += array[i];
-  }
   return sum;
-  // console.log(sum);
 };
 
 const factorSum = (n) => {
@@ -43,9 +37,22 @@ const factorSum = (n) => {
   console.log(analyzeFactor(n));
 };
 
-// console.log(checkPrimeNumber(4));
+const testSum = (n) => {
+  var sum = 0;
+  var m = n;
+  for (let i = 2; i <= m; i++) {
+    while (m % i == 0) {
+      sum += i;
+      m /= i;
+    }
+  }
+  if (sum == n) return n;
+  return testSum(sum);
+};
+
 console.time("taskTime");
-factorSum(35);
+// factorSum(24);
+console.log(testSum(24));
 console.timeEnd("taskTime");
 
 /**
