@@ -52,12 +52,15 @@ class SimpleFunction {
       { id: 4, Name: "Thu", work: "Student" },
     ];
     const testArray = array.find((x) => x.id === id);
-    console.log(testArray);
+    const test = array.map((x) =>
+      x.id === id ? { ...testArray, Name: testArray.Name + "hihi" } : x
+    );
+    console.log(test);
   }
 }
 
 const qh = new SimpleFunction();
-qh.mapArray()
-qh.filterArray(1)
-qh.reduceArray()
+// qh.mapArray()
+// qh.filterArray(1)
+// qh.reduceArray()
 qh.findArray(1);
