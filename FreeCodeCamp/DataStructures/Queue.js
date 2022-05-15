@@ -4,6 +4,7 @@ const Queue = function () {
     console.log(collection);
   };
 
+  //Push Element
   this.enqueue = (elment) => {
     collection.push(elment);
   };
@@ -80,7 +81,7 @@ p.enqueue(["NextJS", 2]);
 p.enqueue(["ThreeJS", 1]);
 p.enqueue(["AngularJS", 2]);
 
-// p.printCollection();
-console.log(p.front());
+// console.log(p.front());
+p.printCollection();
 p.dequeue();
 p.printCollection();

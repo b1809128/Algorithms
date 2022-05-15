@@ -36,6 +36,8 @@ const Stack = function () {
   };
 };
 
+
+
 var myStack = new Stack();
 
 // myStack.push(1)
@@ -43,6 +45,6 @@ var myStack = new Stack();
 myStack.push("freeCodeCamp");
 myStack.push("VietNam");
 myStack.push("JavaScript");
-console.log(myStack.peek());
-console.log(myStack.size());
+console.log("peek: "+myStack.peek());
+console.log("size: "+myStack.size());
 console.log(myStack.get());
