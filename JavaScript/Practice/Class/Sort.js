@@ -92,25 +92,28 @@ class Sort {
   merge = (left, right) => {
     let array = [];
     while (left.length && right.length) {
-      if(left[0] < right[0]){
+      if (left[0] < right[0]) {
         array.push(left.shift());
-      }else{
+      } else {
         array.push(right.shift());
       }
     }
-    return [...array,...left,...right];
-  }
+    return [...array, ...left, ...right];
+  };
 
-  mergeSort = (data)=> {
+  mergeSort = (data) => {
     const p = data.length / 2;
-    if(data.length < 2) return data;
-    const left = data.splice(0,p);
+    if (data.length < 2) return data;
+    const left = data.splice(0, p);
     // console.log([left,data]);
-    return this.merge(this.mergeSort(left),this.mergeSort(data) )
-  }
+    return this.merge(this.mergeSort(left), this.mergeSort(data));
+  };
 }
 
-const test = [1, 2, 4, 5, 1, 3, 8, 5];
-const arr1 = new Sort(test);
-console.log(arr1.mergeSort(arr1.data));
+// const test = [1, 2, 4, 5, 1, 3, 8, 5];
+// const arr1 = new Sort(test);
+// console.log(arr1.mergeSort(arr1.data));
 // arr1.mergeSort(arr1.data);
+
+//TODO: Export Class Methods
+module.exports = Sort;

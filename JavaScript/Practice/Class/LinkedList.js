@@ -1,3 +1,8 @@
+/**
+ * Node [element, next]
+ * Head []
+ */
+
 class Node {
   constructor(element) {
     this.element = element;
@@ -13,7 +18,7 @@ class LinkedList {
 
   size = () => this.length;
 
-  head = () => this.head;
+  getHead = () => this.head;
 
   add = (element) => {
     let node = new Node(element);
@@ -79,7 +84,7 @@ class LinkedList {
     let previousNode;
     if (idx < 0 || idx >= this.length) return false;
     if (idx === 0) {
-      currentNode.element = element;
+      node.next = currentNode;
       this.head = node;
     } else {
       while (listIndex < idx) {
@@ -93,6 +98,25 @@ class LinkedList {
       previousNode.next = node;
     }
     this.length++;
+  };
+
+  removeAt = (idx) => {
+    let currentNode = this.head;
+    let previousNode;
+    let listIndex = 0;
+    if (idx < 0 || idx >= this.length) return null;
+    if (idx === 0) {
+      currentNode = currentNode.next;
+      this.head = currentNode;
+    } else {
+      while (listIndex < idx) {
+        listIndex++;
+        previousNode = currentNode;
+        currentNode = currentNode.next;
+      }
+      previousNode = currentNode.next;
+    }
+    this.length--;
   };
 
   printList = () => {
@@ -119,7 +143,9 @@ console.log("-------------------");
 // console.log(list.empty());
 // console.log(list.indexOf("ThaoAnh"));
 // console.log(list.elementAt(2));
-list.addAt(1, "test");
+// console.log(list.getHead());
+// list.addAt(0, "test");
+list.removeAt(0);
 console.log("-------------------");
 list.printList();
 // let nd = new Node()
