@@ -33,12 +33,33 @@ class HashTable {
       }
     }
   };
+
+  remove = (key) => {
+    let index = hash(key, this.storageLimit);
+    let newArray = [];
+    if (this.storage[index].length === 1 && this.storage[index][0][0] === key) {
+      return [];
+    } else {
+      for (let i = 0; i < this.storage[index].length; i++) {
+        if (this.storage[index][i][0] === key) {
+          continue;
+        } else {
+          this.push(this.storage[index][i]);
+        }
+      }
+    }
+    console.log(newArray);
+    // return newArray;
+  };
 }
 
 const ht = new HashTable();
 ht.add(1, "nodejs");
-ht.add("fe", "reactjs");
-ht.add("fs", "typescript");
-ht.add(2,"angularjs")
+// ht.add("fe", "reactjs");
+// ht.add("fs", "typescript");
+ht.add(3, "reactjs");
+ht.add(4, "typescript");
+ht.add(2, "angularjs");
 
+// ht.remove(3)
 ht.printHashTable();
