@@ -50,7 +50,7 @@ class ObjectPerson {
 
 }
 
-class Permission extends ObjectPerson {
+class PermissionTest extends ObjectPerson {
     accessToken: string;
     permission: number;
     constructor(_id: string, workAt: string, areaWork: string, experience: string, position: string, createdAt: Date, editedAt: Date, name: string, age: number, address: string, phoneNumber: string, emailAddress: string, accessToken: string, permission: number) {
@@ -98,7 +98,7 @@ const QuocHuy = new ObjectPerson("#843934837$234#",
 
 // console.log(QuocHuy.createPerson());
 
-const QuocHuy2 = new Permission("#843934837$234#",
+const QuocHuy2 = new PermissionTest("#843934837$234#",
     "CanTho University",
     "Information Technology",
     "4 years",
