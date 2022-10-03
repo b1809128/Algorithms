@@ -25,21 +25,24 @@ async function readFile(filePath) {
   }
 }
 
-async function readFileSecond(file1, file2) {
+async function readFileSecond(file1, file2, stringLength) {
   try {
+    //+2 for \r\n
+    let num = stringLength + 2;
+    
     //TICKED
     const tick = await fs.readFile(file1);
     const tickLength = tick.toString().length;
     let strTick = tick.toString();
     let strArray = [];
-    for (let i = 0; i < tickLength; i += 6) {
-      let newStr = strTick.slice(i, i + 6);
+    for (let i = 0; i < tickLength; i += num) {
+      let newStr = strTick.slice(i, i + num);
       strArray.push(newStr);
     }
     let lastTickArray = [];
     for (let i = 0; i < strArray.length; i++) {
       let str = "";
-      for (let j = 0; j < 4; j++) {
+      for (let j = 0; j < stringLength; j++) {
         str += strArray[i][j];
       }
       lastTickArray.push(str);
@@ -47,19 +50,18 @@ async function readFileSecond(file1, file2) {
     // console.log(lastTickArray);
 
     //SOLD
-
     const sold = await fs.readFile(file2);
     const soldLength = sold.toString().length;
     let strSold = sold.toString();
     let strSoldArray = [];
-    for (let i = 0; i < soldLength; i += 6) {
-      let newStr = strSold.slice(i, i + 6);
+    for (let i = 0; i < soldLength; i += num) {
+      let newStr = strSold.slice(i, i + num);
       strSoldArray.push(newStr);
     }
     let lastSoldArray = [];
     for (let i = 0; i < strSoldArray.length; i++) {
       let str = "";
-      for (let j = 0; j < 4; j++) {
+      for (let j = 0; j < stringLength; j++) {
         str += strSoldArray[i][j];
       }
       lastSoldArray.push(str);
@@ -115,9 +117,11 @@ const calculatorOutput = (ipTicked, ipSold) => {
   console.log(tickedAndSold);
   console.log("Ticked not Sold: sp07, sp08, sp24, sp30");
   console.log(tickedNotSold);
-  console.log("Sold not ticked: sp025");
+  console.log("Sold not ticked: sp25");
   console.log(soldNotTicked);
 };
 
 // readFile("ticked.txt");
-readFileSecond("ticked.txt", "sold.txt");
+
+//FIXME: function (SanPhamDaTick.txt , SanPhamDaXuatHoaDon.txt , SoKyTuMaHangHoa)
+readFileSecond("ticked.txt", "sold.txt", 6);

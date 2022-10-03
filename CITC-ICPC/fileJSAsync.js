@@ -21,8 +21,8 @@ function readFile() {
       }
       tickArray.push(str);
     }
-    // console.log(tickArray);
-    return tickArray;
+    console.log(tickArray);
+    // return tickArray;
   });
 }
 
