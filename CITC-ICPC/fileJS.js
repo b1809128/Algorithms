@@ -29,7 +29,6 @@ async function readFileSecond(file1, file2, stringLength) {
   try {
     //+2 for \r\n
     let num = stringLength + 2;
-    
     //TICKED
     const tick = await fs.readFile(file1);
     const tickLength = tick.toString().length;
