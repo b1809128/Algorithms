@@ -40,7 +40,7 @@ $(document).ready(function () {
       setTimeout(() => {
         //Chia lấy dư cho 360 để lấy lượng quay không hoàn thành một vòng 360deg
         getPosition(value % 360);
-      }, 2000);
+      }, 5000);
     }
     clicked = true;
   });

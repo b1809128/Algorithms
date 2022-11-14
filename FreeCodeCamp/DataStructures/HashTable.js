@@ -60,7 +60,7 @@ let HashTable = function () {
   };
 };
 
-console.log(hash("quincy", 10));
+console.log(hash("Nguyễn Hồ Quốc Huy", 10));
 
 let ht = new HashTable();
 // ht.add("beau", "person");
@@ -71,5 +71,5 @@ ht.add(1, "nodejs");
 ht.add("fe", "reactjs");
 ht.add("fs", "typescript");
 ht.add(2,"angularjs")
-console.log(ht.lookup("tux"));
-ht.print();
+// console.log(ht.lookup("tux"));
+// ht.print();

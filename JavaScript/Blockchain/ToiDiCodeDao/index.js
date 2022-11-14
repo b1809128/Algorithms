@@ -38,6 +38,7 @@ class Blockchain {
 const huyChain = new Blockchain();
 
 console.log(huyChain);
+console.log("================================");
 
 huyChain.addBlock({
   from: "QuocHuy",
