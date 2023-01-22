@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "log-symbols": "^5.1.0"
+  },
+  "name": "tumlum",
+  "version": "1.0.0",
+  "main": "ActionArray.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module"
+}
