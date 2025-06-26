@@ -37,6 +37,6 @@ const hackText = () => {
   }
 };
 
-// sleepMany();
+sleepMany();
 // hackNumber();
-hackText();
+// hackText();
