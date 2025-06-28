@@ -72,11 +72,54 @@ const DGNL = (DIEMDGNLCA1) => {
   console.table([test]);
 };
 
-console.log("DIEM THI 65-95:");
-for (let i = 65; i <= 95; i += 5) {
-  DGNL(i);
-}
+const TableDGNL = () => {
+  let arrayPrintTable = [];
 
-// console.log("===============================");
-// console.log("DIEM THI THUC TE:");
-// DGNL(90);
+  for (let i = 50; i <= 95; i += 10) {
+    let KETQUA_KO_UT = 0;
+    let KETQUA_UT2 = 0;
+    let KETQUA_UT1 = 0;
+
+    let QUYDOI30 = i * 0.3;
+    KETQUA_KO_UT = QUYDOI30;
+
+    if (QUYDOI30 < 22.5 || QUYDOI30 == 22.5) {
+      KETQUA_UT2 = QUYDOI30 + 2;
+      KETQUA_UT1 = QUYDOI30 + 1;
+    } else {
+      KETQUA_UT2 = QUYDOI30 + ((30 - QUYDOI30) / 7.5) * 2;
+      KETQUA_UT1 = QUYDOI30 + ((30 - QUYDOI30) / 7.5) * 1;
+    }
+
+    // Tạo đối tượng PointData và thêm vào mảng
+    let point = new PointData(
+      i,
+      2,
+      QUYDOI30.toFixed(2),
+      (KETQUA_KO_UT / 0.3).toFixed(2),
+      KETQUA_KO_UT.toFixed(2),
+      (KETQUA_UT1 / 0.3).toFixed(2),
+      KETQUA_UT1.toFixed(2),
+      (KETQUA_UT2 / 0.3).toFixed(2),
+      KETQUA_UT2.toFixed(2)
+    );
+
+    arrayPrintTable.push(point);
+  }
+
+  
+  // console.table([test]);
+  console.table(arrayPrintTable);
+};
+
+// console.log("DIEM THI 65-95:");
+// for (let i = 65; i <= 95; i += 5) {
+//   DGNL(i);
+// }
+
+
+TableDGNL();
+
+console.log("===============================");
+console.log("DIEM THI THUC TE:");
+DGNL(92);
