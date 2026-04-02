@@ -7,7 +7,9 @@ function PointData(
   UT1,
   UT1_30,
   UT2,
-  UT2_30
+  UT2_30,
+  UT3,
+  UT3_30,
 ) {
   this.DIEM_DGNL_CA1 = DIEM_DGNL_CA1;
   this.UT = UT;
@@ -18,6 +20,8 @@ function PointData(
   this.UT1_30 = UT1_30;
   this.UT2 = UT2;
   this.UT2_30 = UT2_30;
+  this.UT3 = UT3;
+  this.UT3_30 = UT3_30;
 }
 
 // const test = new PointData(90, 2, 27, 28, 92, 94);
@@ -27,14 +31,17 @@ const DGNL = (DIEMDGNLCA1) => {
   let KETQUA_KO_UT = 0;
   let KETQUA_UT2 = 0;
   let KETQUA_UT1 = 0;
+  let KETQUA_UT3 = 0;
 
   let QUYDOI30 = DIEMDGNLCA1 * 0.3;
   KETQUA_KO_UT = QUYDOI30;
 
   if (QUYDOI30 < 22.5 || QUYDOI30 == 22.5) {
+    KETQUA_UT3 = QUYDOI30 + 3;
     KETQUA_UT2 = QUYDOI30 + 2;
     KETQUA_UT1 = QUYDOI30 + 1;
   } else {
+    KETQUA_UT3 = QUYDOI30 + ((30 - QUYDOI30) / 7.5) * 3;
     KETQUA_UT2 = QUYDOI30 + ((30 - QUYDOI30) / 7.5) * 2;
     KETQUA_UT1 = QUYDOI30 + ((30 - QUYDOI30) / 7.5) * 1;
   }
@@ -59,14 +66,16 @@ const DGNL = (DIEMDGNLCA1) => {
 
   let test = new PointData(
     DIEMDGNLCA1,
-    2,
+    3,
     QUYDOI30.toFixed(2),
     (KETQUA_KO_UT / 0.3).toFixed(2),
     KETQUA_KO_UT.toFixed(2),
     (KETQUA_UT1 / 0.3).toFixed(2),
     KETQUA_UT1.toFixed(2),
     (KETQUA_UT2 / 0.3).toFixed(2),
-    KETQUA_UT2.toFixed(2)
+    KETQUA_UT2.toFixed(2),
+    (KETQUA_UT3 / 0.3).toFixed(2),
+    KETQUA_UT3.toFixed(2),
   );
 
   console.table([test]);
@@ -79,14 +88,17 @@ const TableDGNL = () => {
     let KETQUA_KO_UT = 0;
     let KETQUA_UT2 = 0;
     let KETQUA_UT1 = 0;
+    let KETQUA_UT3 = 0;
 
     let QUYDOI30 = i * 0.3;
     KETQUA_KO_UT = QUYDOI30;
 
     if (QUYDOI30 < 22.5 || QUYDOI30 == 22.5) {
+      KETQUA_UT3 = QUYDOI30 + 3;
       KETQUA_UT2 = QUYDOI30 + 2;
       KETQUA_UT1 = QUYDOI30 + 1;
     } else {
+      KETQUA_UT3 = QUYDOI30 + ((30 - QUYDOI30) / 7.5) * 3;
       KETQUA_UT2 = QUYDOI30 + ((30 - QUYDOI30) / 7.5) * 2;
       KETQUA_UT1 = QUYDOI30 + ((30 - QUYDOI30) / 7.5) * 1;
     }
@@ -94,20 +106,21 @@ const TableDGNL = () => {
     // Tạo đối tượng PointData và thêm vào mảng
     let point = new PointData(
       i,
-      2,
+      3,
       QUYDOI30.toFixed(2),
       (KETQUA_KO_UT / 0.3).toFixed(2),
       KETQUA_KO_UT.toFixed(2),
       (KETQUA_UT1 / 0.3).toFixed(2),
       KETQUA_UT1.toFixed(2),
       (KETQUA_UT2 / 0.3).toFixed(2),
-      KETQUA_UT2.toFixed(2)
+      KETQUA_UT2.toFixed(2),
+      (KETQUA_UT3 / 0.3).toFixed(2),
+      KETQUA_UT3.toFixed(2),
     );
 
     arrayPrintTable.push(point);
   }
 
-  
   // console.table([test]);
   console.table(arrayPrintTable);
 };
@@ -117,9 +130,10 @@ const TableDGNL = () => {
 //   DGNL(i);
 // }
 
-
 TableDGNL();
 
 console.log("===============================");
 console.log("DIEM THI THUC TE:");
-DGNL(92);
+DGNL(80);
+
+//This is line code in macbook pro m1
