@@ -1,7 +1,7 @@
 function PointData(
   DIEM_DGNL_CA1,
   UT,
-  QUYDOi30,
+  QUYDOI30,
   KHONGUT,
   KHONGUT_30,
   UT1,
@@ -13,7 +13,7 @@ function PointData(
 ) {
   this.DIEM_DGNL_CA1 = DIEM_DGNL_CA1;
   this.UT = UT;
-  this.QUYDOi30 = QUYDOi30;
+  this.QUYDOI30 = QUYDOI30;
   this.KHONGUT = KHONGUT;
   this.KHONGUT_30 = KHONGUT_30;
   this.UT1 = UT1;
@@ -24,116 +24,146 @@ function PointData(
   this.UT3_30 = UT3_30;
 }
 
-// const test = new PointData(90, 2, 27, 28, 92, 94);
-// console.table([test]);
+const convert30 = (DIEM_DGNL_CA1, bonus) => {
+  let QUYDOI30 = DIEM_DGNL_CA1 * 0.3;
 
-const DGNL = (DIEMDGNLCA1) => {
-  let KETQUA_KO_UT = 0;
-  let KETQUA_UT2 = 0;
-  let KETQUA_UT1 = 0;
-  let KETQUA_UT3 = 0;
-
-  let QUYDOI30 = DIEMDGNLCA1 * 0.3;
-  KETQUA_KO_UT = QUYDOI30;
+  if (bonus == 0) {
+    return QUYDOI30;
+  }
 
   if (QUYDOI30 < 22.5 || QUYDOI30 == 22.5) {
-    KETQUA_UT3 = QUYDOI30 + 3;
-    KETQUA_UT2 = QUYDOI30 + 2;
-    KETQUA_UT1 = QUYDOI30 + 1;
+    return QUYDOI30 + bonus;
   } else {
-    KETQUA_UT3 = QUYDOI30 + ((30 - QUYDOI30) / 7.5) * 3;
-    KETQUA_UT2 = QUYDOI30 + ((30 - QUYDOI30) / 7.5) * 2;
-    KETQUA_UT1 = QUYDOI30 + ((30 - QUYDOI30) / 7.5) * 1;
+    return QUYDOI30 + ((30 - QUYDOI30) / 7.5) * bonus;
   }
-  //   console.log({ "Diem DGNL CA1: ": DIEMDGNLCA1 });
-  //   console.log({ "Diem UT: ": 2 });
-  //   console.log({ "Diem quy doi thang diem 30": QUYDOI30.toFixed(2) });
+};
 
-  //   console.log("");
-  //   console.log({
-  //     "DOI TUONG KHONG UT": (KETQUA_KO_UT / 0.3).toFixed(2),
-  //     "QUY DOI 30": KETQUA_KO_UT.toFixed(2),
-  //   });
-  //   console.log({
-  //     "DOI TUONG UT 1": (KETQUA_UT1 / 0.3).toFixed(2),
-  //     "QUY DOI 30": KETQUA_UT1.toFixed(2),
-  //   });
-  //   console.log({
-  //     "DOI TUONG UT 2": (KETQUA_UT2 / 0.3).toFixed(2),
-  //     "QUY DOI 30": KETQUA_UT2.toFixed(2),
-  //   });
-  //   console.log("===============================");
+const arrayPointData = [
+  { area: 7, gender: "Nam", minPoint: 19.1 },
+  { area: 7, gender: "Nữ", minPoint: 26.37 },
+  { area: 10, gender: "Nam", minPoint: 15.3 },
+  { area: 10, gender: "Nữ", minPoint: 19.8 },
+  { area: 11, gender: "Nam", minPoint: 15.15 },
+  { area: 11, gender: "Nữ", minPoint: 18.75 },
+  { area: 12, gender: "Nam", minPoint: 15.15 },
+  { area: 12, gender: "Nữ", minPoint: 16.65 },
+];
 
+const minPass = () => {
+  let newJson = {};
+  for (let i = 0; i < arrayPointData.length; i++) {
+    newJson[i] = {
+      area: arrayPointData[i].area,
+      gender: arrayPointData[i].gender,
+      minPoint: arrayPointData[i].minPoint,
+      prePoint: Math.trunc(((arrayPointData[i].minPoint * 10) / 3) * 100) / 100,
+    };
+  }
+  return newJson;
+};
+
+const checkPass = (point, area, gender, bonus) => {
+  let minArray = Object.values(minPass());
+  for (let i = 0; i < minArray.length; i++) {
+    if (minArray[i].area === area && minArray[i].gender === gender) {
+      if (point >= minArray[i].minPoint) {
+        return (
+          "DIEM CHUAN VUNG: " +
+          area +
+          " | GIOI TINH: " +
+          gender +
+          " LA: " +
+          Math.trunc(minArray[i].minPoint * 100) / 100 +
+          "\n CHUC MUNG BAN DA TRUNG TUYEN VOI DIEM: " +
+          Math.trunc(point * 100) / 100
+        );
+      } else {
+        return (
+          "DIEM CHUAN VUNG: " +
+          area +
+          " | GIOI TINH: " +
+          gender +
+          " LA: " +
+          Math.trunc(minArray[i].minPoint * 100) / 100 +
+          "\n KHONG TRUNG TUYEN: " +
+          Math.trunc(point * 100) / 100
+        );
+      }
+    }
+  }
+};
+
+const DGNL = (DIEMDGNLCA1, bonus, area, gender) => {
   let test = new PointData(
     DIEMDGNLCA1,
-    3,
-    QUYDOI30.toFixed(2),
-    (KETQUA_KO_UT / 0.3).toFixed(2),
-    KETQUA_KO_UT.toFixed(2),
-    (KETQUA_UT1 / 0.3).toFixed(2),
-    KETQUA_UT1.toFixed(2),
-    (KETQUA_UT2 / 0.3).toFixed(2),
-    KETQUA_UT2.toFixed(2),
-    (KETQUA_UT3 / 0.3).toFixed(2),
-    KETQUA_UT3.toFixed(2),
+    bonus,
+    Math.trunc(convert30(DIEMDGNLCA1, 0) * 100) / 100,
+    Math.trunc((convert30(DIEMDGNLCA1, 0) / 0.3) * 100) / 100,
+    Math.trunc(convert30(DIEMDGNLCA1, 0) * 100) / 100,
+    Math.trunc(convert30(DIEMDGNLCA1, 1) * 100) / 100,
+    Math.trunc((convert30(DIEMDGNLCA1, 1) / 0.3) * 100) / 100,
+    Math.trunc(convert30(DIEMDGNLCA1, 2) * 100) / 100,
+    Math.trunc((convert30(DIEMDGNLCA1, 2) / 0.3) * 100) / 100,
+    Math.trunc(convert30(DIEMDGNLCA1, 3) * 100) / 100,
+    Math.trunc((convert30(DIEMDGNLCA1, 3) / 0.3) * 100) / 100,
   );
 
+  console.log("== DIEM CHUAN THEO KHU VUC VA GIOI TINH QUY DOI: ==");
+  console.table(minPass());
+  console.log("== DIEM THI THUC TE: ==");
   console.table([test]);
+  console.log(
+    "\x1b[32m",
+    "===========================KET QUA CUA BAN==============================",
+  );
+  console.log(
+    "\x1b[32m",
+    "DIEM DGNL CA1: " + DIEMDGNLCA1 + " | DIEM UT: " + bonus,
+  );
+  console.log(
+    "\x1b[32m",
+    "DIEM TINH THEO CONG THUC BCA: " +
+      Math.trunc((convert30(DIEMDGNLCA1, bonus) / 0.3) * 100) / 100 +
+      " | DIEM HE SO 30 BCA: " +
+      Math.trunc(convert30(DIEMDGNLCA1, bonus) * 100) / 100,
+  );
+
+  console.log(
+    "\x1b[32m",
+    checkPass(convert30(DIEMDGNLCA1, bonus), area, gender),
+  );
+  console.log(
+    "\x1b[32m",
+    "========================================================================",
+  );
 };
 
 const TableDGNL = () => {
   let arrayPrintTable = [];
 
   for (let i = 50; i <= 95; i += 10) {
-    let KETQUA_KO_UT = 0;
-    let KETQUA_UT2 = 0;
-    let KETQUA_UT1 = 0;
-    let KETQUA_UT3 = 0;
-
-    let QUYDOI30 = i * 0.3;
-    KETQUA_KO_UT = QUYDOI30;
-
-    if (QUYDOI30 < 22.5 || QUYDOI30 == 22.5) {
-      KETQUA_UT3 = QUYDOI30 + 3;
-      KETQUA_UT2 = QUYDOI30 + 2;
-      KETQUA_UT1 = QUYDOI30 + 1;
-    } else {
-      KETQUA_UT3 = QUYDOI30 + ((30 - QUYDOI30) / 7.5) * 3;
-      KETQUA_UT2 = QUYDOI30 + ((30 - QUYDOI30) / 7.5) * 2;
-      KETQUA_UT1 = QUYDOI30 + ((30 - QUYDOI30) / 7.5) * 1;
-    }
+    convert30(i, 0);
 
     // Tạo đối tượng PointData và thêm vào mảng
     let point = new PointData(
       i,
-      3,
-      QUYDOI30.toFixed(2),
-      (KETQUA_KO_UT / 0.3).toFixed(2),
-      KETQUA_KO_UT.toFixed(2),
-      (KETQUA_UT1 / 0.3).toFixed(2),
-      KETQUA_UT1.toFixed(2),
-      (KETQUA_UT2 / 0.3).toFixed(2),
-      KETQUA_UT2.toFixed(2),
-      (KETQUA_UT3 / 0.3).toFixed(2),
-      KETQUA_UT3.toFixed(2),
+      0,
+      Math.trunc(convert30(i, 0) * 100) / 100,
+      Math.trunc((convert30(i, 0) / 0.3) * 100) / 100,
+      Math.trunc(convert30(i, 0) * 100) / 100,
+      Math.trunc((convert30(i, 1) / 0.3) * 100) / 100,
+      Math.trunc(convert30(i, 1) * 100) / 100,
+      Math.trunc((convert30(i, 2) / 0.3) * 100) / 100,
+      Math.trunc(convert30(i, 2) * 100) / 100,
+      Math.trunc((convert30(i, 3) / 0.3) * 100) / 100,
+      Math.trunc(convert30(i, 3) * 100) / 100,
     );
-
     arrayPrintTable.push(point);
   }
 
-  // console.table([test]);
   console.table(arrayPrintTable);
 };
 
-// console.log("DIEM THI 65-95:");
-// for (let i = 65; i <= 95; i += 5) {
-//   DGNL(i);
-// }
+// TableDGNL();
 
-TableDGNL();
-
-console.log("===============================");
-console.log("DIEM THI THUC TE:");
-DGNL(80);
-
-//This is line code in macbook pro m1
+DGNL(80, 2, 7, "Nữ");
